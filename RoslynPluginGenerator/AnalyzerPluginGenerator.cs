@@ -304,7 +304,7 @@ namespace SonarQube.Plugins.Roslyn
             this.logger.LogDebug(UIResources.APG_LogAnalyzerLanguage, roslynLanguageName);
 
             DiagnosticAssemblyScanner diagnosticAssemblyScanner = new DiagnosticAssemblyScanner(this.logger, additionalSearchFolder);
-            IEnumerable<DiagnosticAnalyzer> analyzers = diagnosticAssemblyScanner.InstantiateDiagnostics(roslynLanguageName, analyzerFiles.ToArray());
+            IEnumerable<DiagnosticAnalyzer> analyzers = diagnosticAssemblyScanner.InstantiateDiagnostics(roslynLanguageName, analyzerFiles.Where(x=>!x.Contains("Microsoft.CodeAnalysis")).ToArray());
 
             return analyzers;
         }
